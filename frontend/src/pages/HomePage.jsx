@@ -1,3 +1,5 @@
+import Nav from "../layouts/Nav";
+
 export default function HomePage() {
-  return <div>HomePage</div>;
+  return <></>;
 }
