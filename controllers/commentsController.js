@@ -1,34 +1,38 @@
-import {
-  getComments,
-  getSingleComment,
-  createComment,
-  deleteComment,
-  updateComment,
-} from "../database/modals/commentsModal.js";
+import commentsModal from "../database/modals/commentsModal.js";
 
-//TODO:
-const get_all_comments = (req, res) => {
-  res.send(" got comments not yet IMPLEMENTED");
+//DONE:
+const get_all_comments = async (req, res) => {
+  const result = await commentsModal.getComments();
+  res.json(result);
 };
 
-//TODO:
-const create_comment = (req, res) => {
-  res.send("delete user NOT IMPLEMENTED");
+//DONE:
+const create_comment = async (req, res, next) => {
+  const data = req.body[0];
+  const id = req.params.id;
+  const result = await commentsModal.createComment(data, id);
+  res.json(result);
 };
 
-//TODO:
-const delete_comment = (req, res) => {
-  res.send("delete user NOT IMPLEMENTED");
+//DONE:
+const delete_comment = async (req, res) => {
+  const result = await commentsModal.deleteComment(req.params.id);
+  res.json(result);
 };
 
-//TODO:
-const update_comment = (req, res) => {
-  res.send("update user NOT IMPLEMENTED");
+//DONE:
+const update_comment = async (req, res) => {
+  const data = req.body[0];
+  const id = req.params.id;
+  const result = await commentsModal.updateComment(data, id);
+  res.json(data);
 };
 
-//TODO:
-const get_single_comments = (req, res) => {
-  res.send("update user NOT IMPLEMENTED");
+//DONE:
+const get_single_comments = async (req, res) => {
+  const id = req.params.id;
+  const result = await commentsModal.getSingleComment(id);
+  res.json(result);
 };
 
 export default {

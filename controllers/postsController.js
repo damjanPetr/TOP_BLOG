@@ -1,29 +1,40 @@
 import postModal from "../database/modals/postModal.js";
 
-//TODO:
-
+// DONE:
 const get_all_posts = async (req, res) => {
-  // console.log(req.message);
   const result = await postModal.getPosts();
   res.json(result);
 };
-//TODO:
-const create_post = (req, res) => {
-  res.send("create single blog  NOT IMPLEMENTED");
+const create_post = async (req, res) => {
+  const data = req.body[0];
+  const result = await postModal.createPost(data, req.params.id);
+  res.json(result);
+};
+// DONE:
+const delete_post = async (req, res) => {
+  const id = req.params.id;
+  const result = await postModal.deletePost(id);
+  res.json(result);
 };
 
-//TODO:
-const delete_post = (req, res) => {
-  res.send("delete user NOT IMPLEMENTED");
-};
+//DONE:
+const update_post = async (req, res) => {
+  const data = req.body[0];
+  console.log(data);
+  const id = req.params.id;
+  const result = await postModal.updatePost(data, id);
+  console.log(result);
 
-//TODO:
-const update_post = (req, res) => {
-  res.send("update single NOT IMPLEMENTED");
+  res.json(result);
 };
-//TODO:
-const get_single_post = (req, res) => {
-  res.send("get single blog user NOT IMPLEMENTED");
+//DONE:
+const get_single_post = async (req, res) => {
+  try {
+    const result = await postModal.getSinglePost(req.params.id);
+    res.json(result);
+  } catch (error) {
+    next(error);
+  }
 };
 
 export default {

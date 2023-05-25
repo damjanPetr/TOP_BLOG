@@ -2,7 +2,9 @@ import { NavLink } from "react-router-dom";
 export default function Nav() {
   return (
     <header className="content flex items-center justify-between rounded-b-md bg-teal-500 p-2 text-white">
-      <div className="logo">Home</div>
+      <div className="logo">
+        <NavLink to={"/"}>Home</NavLink>
+      </div>
       <nav>
         <ul className=" flex list-none gap-4 p-2">
           {[

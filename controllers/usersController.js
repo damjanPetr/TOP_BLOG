@@ -4,38 +4,30 @@ const get_all_users = async (req, res) => {
   res.json(result);
 };
 
+// DONE:
 const create_user = async (req, res) => {
-  const { username, password } = req.params;
-  console.log(req.body);
-  const result = await usersModal.createUser(username, password);
+  const data = req.body[0];
+
+  const result = await usersModal.createUser(data);
 
   res.send(result);
 };
 
-//TODO:
+// DONE:
 const delete_user = async (req, res) => {
-  const user = req.params.id;
-  try {
-    const result = await usersModal.deleteUser(user);
-    res.send(result + " deleted");
-  } catch (err) {
-    console.log(err);
-    res.sendStatus(404);
-  }
-};
-
-//TODO:
-const update_user = async (req, res) => {
-  const result = await usersModal.updateUser(req);
+  const result = await usersModal.deleteUser(req.params.id);
   res.json(result);
 };
-//TODO:
+
+//DONE:
+const update_user = async (req, res) => {
+  const data = req.body[0];
+  console.log(data);
+  const result = await usersModal.updateUser(data, req.params.id);
+  res.json(result);
+};
+//DONE:
 const get_single_user = async (req, res) => {
-  console.log(req.body);
-
-  const [first, second] = req.body;
-
-  console.log(first);
   const result = await usersModal.getUsers(req.params.id);
   res.json(req.body);
 };
