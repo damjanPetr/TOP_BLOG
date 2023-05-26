@@ -1,7 +1,8 @@
 import pool from "../database.js";
 import date from "./date.js";
 async function getUsers(id) {
-  const [rows] = await pool.query("SELECT * FROM users where id = ?", [id]);
+  const [rows] = await pool.query("SELECT * FROM users ;");
+
   return rows;
 }
 

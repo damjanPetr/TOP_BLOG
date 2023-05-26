@@ -41,7 +41,3 @@ async function updatePost(data, id) {
 }
 
 export default { getPosts, getSinglePost, createPost, deletePost, updatePost };
-
-// TODO:teouheon
-
-// ? play

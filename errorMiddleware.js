@@ -2,7 +2,8 @@ const ErrorHandler = (err, req, res, next) => {
   console.log("Middleware Error Handling");
   const errStatus = err.statusCode || 500;
   const errMsg = err.message || "Something went wrong";
-  res.status(errStatus).json({
+  res.status(errStatus).send({
+    play: "uheotnauheoantuenota",
     success: false,
     status: errStatus,
     message: errMsg,

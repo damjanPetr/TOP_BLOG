@@ -11,7 +11,7 @@ const postRouter = express.Router();
 const commentsRouter = express.Router();
 
 route.get("/", (req, res, next) => {
-  res.send("<h1>Play</h1>");
+  res.send("<p>this is the api for the my sql database</p>");
 });
 
 route.use("/", userRouter);
@@ -24,8 +24,6 @@ userRouter.get("/user/:id", asyncHandler(users.get_single_user));
 userRouter.post("/user/:id", asyncHandler(users.create_user));
 userRouter.patch("/user/:id", asyncHandler(users.update_user));
 userRouter.delete("/user/:id", asyncHandler(users.delete_user));
-
-//
 
 // posts
 

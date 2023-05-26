@@ -1,0 +1,20 @@
+# fly.toml app configuration file generated for topblog on 2023-05-26T23:35:16+02:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "topblog"
+primary_region = "otp"
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+
+[env]
+  APP_ENV = "production"
+  DB_CONNECTION = "mysqlconnect"
+  DB_HOST = "mysqldb1.internal"
+  DB_DATABASE= "blog"

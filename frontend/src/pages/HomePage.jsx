@@ -6,6 +6,7 @@ export default function HomePage() {
 
   return (
     <>
+      <p>{import.meta.env.REACT_APP}</p>
       <div className="mx-auto flex flex-wrap justify-between">
         {data.map((item) => {
           return (
