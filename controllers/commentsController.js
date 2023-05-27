@@ -1,26 +1,25 @@
 import commentsModal from "../database/modals/commentsModal.js";
 
-//DONE:
 const get_all_comments = async (req, res) => {
-  const result = await commentsModal.getComments();
+  const post_id = req.params.post_id;
+  const result = await commentsModal.getComments(post_id);
   res.json(result);
 };
 
-//DONE:
 const create_comment = async (req, res, next) => {
   const data = req.body[0];
-  const id = req.params.id;
-  const result = await commentsModal.createComment(data, id);
+  const post_id = req.params.post_id;
+  const result = await commentsModal.createComment(data, post_id);
   res.json(result);
 };
 
-//DONE:
 const delete_comment = async (req, res) => {
-  const result = await commentsModal.deleteComment(req.params.id);
+  const post_id = req.params.post_id;
+  const id = req.params.id;
+  const result = await commentsModal.deleteComment(post_id, id);
   res.json(result);
 };
 
-//DONE:
 const update_comment = async (req, res) => {
   const data = req.body[0];
   const id = req.params.id;
@@ -28,10 +27,10 @@ const update_comment = async (req, res) => {
   res.json(data);
 };
 
-//DONE:
 const get_single_comments = async (req, res) => {
+  const post_id = req.params.post_id;
   const id = req.params.id;
-  const result = await commentsModal.getSingleComment(id);
+  const result = await commentsModal.getSingleComment(post_id, id);
   res.json(result);
 };
 

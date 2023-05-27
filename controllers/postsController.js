@@ -1,40 +1,38 @@
 import postModal from "../database/modals/postModal.js";
 
-// DONE:
 const get_all_posts = async (req, res) => {
-  const result = await postModal.getPosts();
-  res.json(result);
-};
-const create_post = async (req, res) => {
-  const data = req.body[0];
-  const result = await postModal.createPost(data, req.params.id);
-  res.json(result);
-};
-// DONE:
-const delete_post = async (req, res) => {
-  const id = req.params.id;
-  const result = await postModal.deletePost(id);
+  const author_id = req.params.user_id;
+  const result = await postModal.getPosts(author_id);
   res.json(result);
 };
 
-//DONE:
+const create_post = async (req, res) => {
+  const data = req.body[0];
+  const author_id = req.params.user_id;
+  const result = await postModal.createPost(data, author_id);
+  res.json(result);
+};
+const delete_post = async (req, res) => {
+  const id = req.params.post_id;
+  const author_id = req.params.user_id;
+  const result = await postModal.deletePost(author_id, id);
+  res.json(result);
+};
+
 const update_post = async (req, res) => {
   const data = req.body[0];
-  console.log(data);
-  const id = req.params.id;
-  const result = await postModal.updatePost(data, id);
+  const id = req.params.post_id;
+  const author_id = req.params.user_id;
+  const result = await postModal.updatePost(data, author_id, id);
   console.log(result);
 
   res.json(result);
 };
-//DONE:
 const get_single_post = async (req, res) => {
-  try {
-    const result = await postModal.getSinglePost(req.params.id);
-    res.json(result);
-  } catch (error) {
-    next(error);
-  }
+  const author_id = req.params.user_id;
+  const id = req.params.post_id;
+  const result = await postModal.getSinglePost(author_id, id);
+  res.json(result);
 };
 
 export default {

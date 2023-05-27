@@ -1,30 +1,34 @@
 import pool from "../database.js";
 import date from "./date.js";
-async function getComments() {
-  const [rows] = await pool.query("SELECT * FROM comments;");
+async function getComments(post_id) {
+  const [rows] = await pool.query("SELECT * FROM comments WHERE post_id = ?;", [
+    post_id,
+  ]);
   return rows;
 }
-
-async function getSingleComment(id) {
+async function getSingleComment(post_id, id) {
   const [rows] = await pool.query(
     `SELECT * FROM comments 
-  Where id = ?;`,
-    [id]
+  Where post_id = ? and id = ?;`,
+    [post_id, id]
   );
   return rows;
 }
 
 async function createComment(data, post_id) {
   const { body } = data;
-  console.log(body);
   const [rows] = await pool.query(
     "INSERT INTO comments (body,post_id,created_at) values(?, ?, ?);",
     [body, post_id, date]
   );
+  return rows;
 }
 
-async function deleteComment(id) {
-  const [rows] = await pool.query("DELETE FROM comments WHERE id = ?; ", [id]);
+async function deleteComment(post_id, id) {
+  const [rows] = await pool.query(
+    "DELETE FROM comments WHERE post_id = ? AND id = ?; ",
+    [post_id, id]
+  );
   return rows;
 }
 

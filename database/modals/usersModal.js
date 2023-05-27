@@ -6,8 +6,7 @@ async function getUsers(id) {
   return rows;
 }
 
-async function getSingleUser(data) {
-  const id = data[0];
+async function getSingleUser(id) {
   const [rows] = await pool.query(
     `SELECT * FROM users 
   Where id = ?;`,
@@ -32,7 +31,6 @@ async function deleteUser(id) {
 
 async function updateUser(data, id) {
   const { username, password, email } = data;
-  console.log(username, password, email);
   const [row] = await pool.query(
     "UPDATE users SET username = ? ,password = ?,email= ? where id = ?",
     [username, password, email, id]
