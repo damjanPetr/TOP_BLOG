@@ -4,7 +4,7 @@ export default function Root() {
   return (
     <>
       <Nav />
-      <main className="flex">
+      <main className="flex w-screen">
         <Outlet />
       </main>
     </>

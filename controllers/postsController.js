@@ -7,7 +7,7 @@ const get_all_posts = async (req, res) => {
 };
 
 const create_post = async (req, res) => {
-  const data = req.body[0];
+  const data = req.body;
   const author_id = req.params.user_id;
   const result = await postModal.createPost(data, author_id);
   res.json(result);
@@ -20,7 +20,7 @@ const delete_post = async (req, res) => {
 };
 
 const update_post = async (req, res) => {
-  const data = req.body[0];
+  const data = req.body;
   const id = req.params.post_id;
   const author_id = req.params.user_id;
   const result = await postModal.updatePost(data, author_id, id);

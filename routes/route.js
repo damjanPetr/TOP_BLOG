@@ -1,14 +1,37 @@
 import express from "express";
+
 const start = express.Router();
 
 import userRouter from "./userRouter.js";
 import postRouter from "./postRouter.js";
 import commentsRouter from "./commentsRouter.js";
+import passport from "passport";
+import LocalStrategy from "passport-local";
+
+import session from "express-session";
+
 start.get("/", (req, res, next) => {
   console.log(req.headers);
-  res.send(req.header("host"));
+  res.send("you are on the api route");
 });
 
+// start.use(passport);
+
+start.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+
+// function crypCreateUsers(username,password,done)
+// {
+
+// }
+start.use(passport.session());
+start.use(passport.initialize());
+// passport.use( new LocalStrategy.Strategy(crypCreateUsers)
 start.use("/user", userRouter);
 
 // posts

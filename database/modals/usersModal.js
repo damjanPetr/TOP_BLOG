@@ -1,5 +1,7 @@
 import pool from "../database.js";
 import date from "./date.js";
+import bcrypt from "bcrypt";
+import validator from "express-validator";
 async function getUsers(id) {
   const [rows] = await pool.query("SELECT * FROM users ;");
 
@@ -17,11 +19,22 @@ async function getSingleUser(id) {
 
 async function createUser(data) {
   const { username, email, password } = data;
-  const [rows] = await pool.query(
-    "INSERT INTO users (username,password,email,registered_at) VALUES (?, ?, ?,?);",
-    [username, password, email, date]
+
+  const [getDatabeUsernameResult] = await pool.query(
+    "select * from users where username = ?;",
+    [username]
   );
-  return rows;
+  if (getDatabeUsernameResult[0] === undefined) {
+    bcrypt.hash(password, 10, async (err, hashPassword) => {
+      const [rows] = await pool.query(
+        "INSERT INTO users (username,password,email,registered_at) VALUES (?, ?, ?,?);",
+        [username, password, hashPassword, date]
+      );
+    });
+    return { success: "User successfully registered" };
+  } else {
+    return { message: "User already exists" };
+  }
 }
 
 async function deleteUser(id) {
