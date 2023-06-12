@@ -2,9 +2,9 @@ import pool from "../database.js";
 import date from "./date.js";
 import bcrypt from "bcrypt";
 import validator from "express-validator";
+
 async function getUsers(id) {
   const [rows] = await pool.query("SELECT * FROM users ;");
-
   return rows;
 }
 
@@ -19,7 +19,6 @@ async function getSingleUser(id) {
 
 async function createUser(data) {
   const { username, email, password } = data;
-
   const [getDatabeUsernameResult] = await pool.query(
     "select * from users where username = ?;",
     [username]
@@ -28,7 +27,7 @@ async function createUser(data) {
     bcrypt.hash(password, 10, async (err, hashPassword) => {
       const [rows] = await pool.query(
         "INSERT INTO users (username,password,email,registered_at) VALUES (?, ?, ?,?);",
-        [username, password, hashPassword, date]
+        [username, hashPassword, email, date]
       );
     });
     return { success: "User successfully registered" };

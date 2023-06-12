@@ -1,7 +1,6 @@
-function HomeBlogPosts(props) {
+function Post(props) {
   let { title, body, date_created } = props;
   const date = new Date(date_created).toLocaleDateString();
-  // console.dir(date.toLocaleDateString());
   return (
     <div className="container w-full basis-2/4 bg-inherit p-9">
       <div className="container flex  flex-col rounded-lg bg-fuchsia-100 p-5">
@@ -20,4 +19,4 @@ function HomeBlogPosts(props) {
     </div>
   );
 }
-export default HomeBlogPosts;
+export default Post;

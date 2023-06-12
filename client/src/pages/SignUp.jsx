@@ -13,6 +13,7 @@ export default function SignUp() {
               type="text"
               name="username"
               id="username"
+              placeholder="username"
             />
           </div>
           <div className="">
@@ -25,6 +26,7 @@ export default function SignUp() {
               type="password"
               name="password"
               id="password"
+              placeholder="password"
             />
           </div>
           <div className="">
@@ -36,6 +38,7 @@ export default function SignUp() {
               required
               type="email"
               name="email"
+              placeholder="example@gmail.com"
               id="email"
             />
           </div>

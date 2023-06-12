@@ -1,9 +1,14 @@
 import pool from "../database.js";
 import date from "./date.js";
+
 async function getPosts(author_id) {
   const [rows] = await pool.query("SELECT * FROM posts WHERE author_id = ? ;", [
     author_id,
   ]);
+  return rows;
+}
+async function getEveryPost() {
+  const [rows] = await pool.query(`SELECT * FROM posts;`);
   return rows;
 }
 
@@ -45,4 +50,11 @@ async function updatePost(data, author_id, id) {
   return rows;
 }
 
-export default { getPosts, getSinglePost, createPost, deletePost, updatePost };
+export default {
+  getPosts,
+  getSinglePost,
+  createPost,
+  deletePost,
+  updatePost,
+  getEveryPost,
+};

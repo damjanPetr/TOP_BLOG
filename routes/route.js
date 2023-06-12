@@ -1,40 +1,39 @@
-import express from "express";
-
-const start = express.Router();
-
+import express, { json } from "express";
 import userRouter from "./userRouter.js";
 import postRouter from "./postRouter.js";
 import commentsRouter from "./commentsRouter.js";
-import passport from "passport";
-import LocalStrategy from "passport-local";
+import "./passport-config.js";
+import auth from "./authRouter.js";
 
-import session from "express-session";
+const start = express.Router();
+start.get("/posts");
+start.post("/loginauth", auth);
 
-start.get("/", (req, res, next) => {
-  console.log(req.headers);
-  res.send("you are on the api route");
+start.get("/auth", (req, res) => {
+  if (req.isAuthenticated) {
+    res.json({ auth: true });
+  } else {
+    res.json({ auth: false });
+  }
 });
 
-// start.use(passport);
+start.get("/", (req, res, next) => {
+  console.log(req.user);
+  if (req.user) {
+    res.json(req.user);
+  } else {
+  }
+  res.json({ message: "no user" });
+});
 
-start.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true,
-  })
-);
+//////
+//////
+//////
+//////
 
-// function crypCreateUsers(username,password,done)
-// {
-
-// }
-start.use(passport.session());
-start.use(passport.initialize());
-// passport.use( new LocalStrategy.Strategy(crypCreateUsers)
 start.use("/user", userRouter);
 
-// posts
+// posts router thats nested in users
 userRouter.use(
   "/:user_id/posts",
   (req, res, next) => {
@@ -44,7 +43,7 @@ userRouter.use(
   postRouter
 );
 
-//comments
+//comments router thats nested in posts
 postRouter.use(
   "/:post_id/comments",
   (req, res, next) => {

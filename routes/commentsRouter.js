@@ -3,6 +3,7 @@ import asyncHandler from "express-async-handler";
 import express from "express";
 
 const commentsRouter = express.Router({ mergeParams: true });
+
 // DONE:
 commentsRouter.get("/", asyncHandler(comments.get_all_comments));
 // DONE:

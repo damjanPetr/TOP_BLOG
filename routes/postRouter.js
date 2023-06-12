@@ -3,6 +3,8 @@ import asyncHandler from "express-async-handler";
 import express from "express";
 
 export const postRouter = express.Router({ mergeParams: true });
+postRouter.get("/posts", asyncHandler(posts.get_every_post));
+
 // DONE:
 postRouter.get("/", asyncHandler(posts.get_all_posts));
 // DONE:

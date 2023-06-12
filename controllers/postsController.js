@@ -6,6 +6,11 @@ const get_all_posts = async (req, res) => {
   res.json(result);
 };
 
+const get_every_post = async (req, res) => {
+  const result = await postModal.getEveryPost();
+  res.json(result);
+};
+
 const create_post = async (req, res) => {
   const data = req.body;
   const author_id = req.params.user_id;
@@ -25,9 +30,9 @@ const update_post = async (req, res) => {
   const author_id = req.params.user_id;
   const result = await postModal.updatePost(data, author_id, id);
   console.log(result);
-
   res.json(result);
 };
+
 const get_single_post = async (req, res) => {
   const author_id = req.params.user_id;
   const id = req.params.post_id;
@@ -41,4 +46,5 @@ export default {
   delete_post,
   update_post,
   get_single_post,
+  get_every_post,
 };

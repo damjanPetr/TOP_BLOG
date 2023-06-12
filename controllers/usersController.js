@@ -12,24 +12,19 @@ const get_single_user = async (req, res) => {
 
 const create_user = async (req, res) => {
   const data = req.body;
-
   const result = await usersModal.createUser(data);
-
   res.json(result);
 };
 
 const delete_user = async (req, res) => {
   const id = req.params.user_id;
-
   const result = await usersModal.deleteUser(id);
   res.json(result);
 };
 
 const update_user = async (req, res) => {
   const data = req.body;
-  console.log(data);
   const id = req.params.user_id;
-
   const result = await usersModal.updateUser(data, id);
   res.json(result);
 };
