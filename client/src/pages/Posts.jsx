@@ -29,6 +29,8 @@ export default function Posts() {
           content={post.content}
           created_at={post.created_at}
           comment={comment}
+          author_id={post.author_id}
+          post_id={post.id}
         />
       ))}
     </div>

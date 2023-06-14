@@ -45,7 +45,7 @@ export default function SignUp() {
           <input
             className="m-1 rounded-md bg-blue-400 p-1 text-white"
             type="submit"
-            value="Login"
+            value="Regis ter"
           />
         </div>
       </form>

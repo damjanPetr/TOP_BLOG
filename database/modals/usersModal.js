@@ -2,7 +2,7 @@ import pool from "../database.js";
 import date from "./date.js";
 import bcrypt from "bcrypt";
 import validator from "express-validator";
-
+import returnJWT from "../../routes/jwt.js";
 async function getUsers(id) {
   const [rows] = await pool.query("SELECT * FROM users ;");
   return rows;
@@ -30,7 +30,13 @@ async function createUser(data) {
         [username, hashPassword, email, date]
       );
     });
-    return { success: "User successfully registered" };
+    const { signedToken, expiresIn } = await returnJWT(data);
+    return {
+      success: "User successfully registered",
+      signedToken: signedToken,
+      expiresIn: expiresIn,
+      user: data,
+    };
   } else {
     return { message: "User already exists" };
   }
@@ -49,4 +55,5 @@ async function updateUser(data, id) {
   );
   return row;
 }
+
 export { getUsers, getSingleUser, createUser, deleteUser, updateUser };

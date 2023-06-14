@@ -3,10 +3,11 @@ import userRouter from "./userRouter.js";
 import postRouter from "./postRouter.js";
 import commentsRouter from "./commentsRouter.js";
 import "./passport-config.js";
-import auth from "./authRouter.js";
+import auth from "./auth.js";
+import passport from "passport";
 
 const start = express.Router();
-start.get("/posts");
+start.get("/posts", passport.authenticate("jwt", { session: false }));
 start.post("/loginauth", auth);
 
 start.get("/auth", (req, res) => {
@@ -25,11 +26,6 @@ start.get("/", (req, res, next) => {
   }
   res.json({ message: "no user" });
 });
-
-//////
-//////
-//////
-//////
 
 start.use("/user", userRouter);
 

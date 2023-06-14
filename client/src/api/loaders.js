@@ -57,3 +57,13 @@ export async function getAllPostData() {
     .catch((error) => console.error(error));
   return posts;
 }
+
+export async function deleteComment(user_id, post_id, comment_id) {
+  console.log(arguments);
+  const response = await fetch(
+    `api/user/${user_id}/posts/${post_id}/comments/${comment_id}`,
+    { method: "DELETE" }
+  );
+  const data = await response.json();
+  console.log(data);
+}

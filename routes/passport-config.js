@@ -16,15 +16,16 @@ passport.use(
   new JwtStrategy(
     {
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      secretOrKey: process.env.JWT_SECRET,
+      secretOrKey: process.env.JWT_PUBLIC_KEY,
     },
     async (jwtpayload, cb) => {
+      console.log("🚀 ~ file: passport-config.js:22 ~ jwtpayload:", jwtpayload);
       const user = await getSingleForAuth(jwtpayload.username);
       if (user) {
         return cb(null, user);
+      } else {
+        return cb(null, false);
       }
-
-      return cb(null, false);
     }
   )
 );

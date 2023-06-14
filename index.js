@@ -8,6 +8,7 @@ import errorHandler from "./errorMiddleware.js";
 import route from "./routes/route.js";
 import path from "path";
 import { fileURLToPath } from "url";
+
 const __filename = fileURLToPath(import.meta.url);
 
 const __dirname = path.dirname(__filename);
@@ -17,15 +18,20 @@ dotenv.config();
 const PORT = process.env.PORT || 3000;
 const app = express();
 
+app.use(passport.initialize());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(express.static("./client/dist"));
 
-app.use(passport.initialize());
 console.log("All middleware functions are loaded");
 
-app.use("/api", cors(), route);
+app.use(
+  "/api",
+  cors(),
+  // passport.authenticate("jwt", { session: false }),
+  route
+);
 app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname, "client/dist/index.html"), function (err) {
     if (err) {

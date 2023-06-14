@@ -10,9 +10,9 @@ export default function Login() {
     const formElement = document.querySelector("#login-form");
     const formData = new FormData(formElement);
     const formDataJson = Object.fromEntries(formData);
-    const data = await loaders.createUser(formDataJson);    
+    const data = await loaders.createUser(formDataJson);
     console.log(data);
-    login(data.token);
+    login(data);
   };
 
   return (

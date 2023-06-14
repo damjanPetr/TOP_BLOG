@@ -1,5 +1,13 @@
+/* eslint-disable react/prop-types */
 import PostComments from "./postComments";
-export default function PostPagePosts({ title, content, created_at, comment }) {
+export default function PostPagePosts({
+  title,
+  post_id,
+  content,
+  created_at,
+  comment,
+  author_id,
+}) {
   return (
     <div className="container m-2 p-1">
       <div className="">
@@ -19,6 +27,9 @@ export default function PostPagePosts({ title, content, created_at, comment }) {
               key={comments.id}
               body={comments.body}
               created_at={comments.created_at}
+              post_id={post_id}
+              comment_id={comments.id}
+              author_id={author_id}
             />
           ))}
         </div>
